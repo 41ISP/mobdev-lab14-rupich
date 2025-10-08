@@ -1,0 +1,25 @@
+import { Link } from "react-router-dom"
+import Input from "../../components/Input"
+import Button from "../../components/Button"
+
+const SingUp = () => {
+    return(
+        <div className="auth-page">
+            <div className="auth-container">
+                <h1 className="auth-title">Регистрация</h1>
+                <form className="auth-form">
+                    <Input/>
+                    <Input/>
+                    <Input/>
+                    <Input type ="password"/>
+                    <Button>Зарегистрироваться</Button>
+                </form>
+                <footer className="auth-footer">
+                <Link to ="/signin">Войти</Link>
+                </footer>
+            </div>
+        </div>
+    )
+}
+
+export default SingUp
