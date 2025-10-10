@@ -1,11 +1,39 @@
-export const registerUser =async (user) => {
-    const req = fetch("https://kitek.ktkv.dev/feedback/api/auth/register",{
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-            "Content-Type": "application/json"
+export const registerUser = async (user) => {
+    try {
+        const req = await fetch("https://kitek.ktkv.dev/feedback/api/auth/register", {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const res = await req.json()
+        if (!res.success) {
+            throw new Error(res.error)
         }
-    })
-    const res = await req.json()
-    return res
+        return res
+    } catch (err) {
+        console.log(err)
+        throw new Error(err)
+    }
+}
+export const loginUser = async (user) => {
+    try {
+        const req = await fetch("https://kitek.ktkv.dev/feedback/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify(user),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const res = await req.json()
+        if (!res.success) {
+            throw new Error(res.error)
+        }
+        return res
+    } catch (err) {
+        console.log(err)
+        throw new Error(err)
+    }
+
 }
