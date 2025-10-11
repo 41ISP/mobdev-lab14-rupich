@@ -3,9 +3,13 @@ import Button from "../../components/Button"
 import Input from "../../components/Input"
 import { useState } from "react"
 import { loginUser } from "../../api/api"
+import { useUserStore } from "../../store/store"
 
 const SignIn = () => {
     const [error, setError] = useState("")
+    const { setJWT } = useUserStore()
+    console.log(useUserStore())
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -16,10 +20,10 @@ const SignIn = () => {
         }
         try {
             const data = await loginUser(user)
-            const json = await data.json()
-            if (!json.success) throw new Error(json.error)
-            console.log(json)
-            
+            if (!data.success) throw new Error(data.error)
+            console.log(data)
+            setJWT(data.token)
+
         } catch (err) {
             console.error(err)
             setError(err.message)
