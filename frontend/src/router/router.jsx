@@ -5,6 +5,7 @@ import Loyout from "../components/Loyout/Loyout"
 import Board from "../pages/Board/Board"
 import MyMessages from "../pages/MyMessages"
 import AuthGuard from "../components/AuthGuard"
+import Logout from "../pages/Logout"
 
 
 export const router = createBrowserRouter([
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
     {
         path: "/signin",
         element: <SignIn />
+    },
+    {
+        path: "/logout",
+        element:<Logout />
     },
     {
         path: "/",
