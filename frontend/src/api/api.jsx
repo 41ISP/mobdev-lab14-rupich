@@ -40,7 +40,7 @@ export const loginUser = async (user) => {
     }
 
 }
-export const fetchPost = async () => {
+export const fetchMessages = async () => {
     try {
         const res = await fetch(`https://kitek.ktkv.dev/feedback/api/messages`)
         const json = await res.json()
@@ -64,6 +64,59 @@ export const sendMessage = async (message) => {
         )
         console.log(await req.json())
     } catch (err) {
-        consoke.error(err)
+        console.error(err)
+    }
+}
+export const deleteMessage = async (id) => {
+    try {
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(
+            `https://kitek.ktkv.dev/feedback/api/messages/${id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: "Bearer " + jwt.token,
+                },
+            }
+        )
+        console.log(await req.json())
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const reportMessage = async (id) => {
+    try {
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(
+            `https://kitek.ktkv.dev/feedback/api/messages/${id}/report`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + jwt.token,
+                },
+            }
+        )
+        console.log(await req.json())
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export const likeMessage = async (id) => {
+    try {
+        const { jwt } = useUserStore.getState()
+        const req = await fetch(
+            `https://kitek.ktkv.dev/feedback/api/messages/${id}/like`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + jwt.token,
+                },
+            }
+        )
+        console.log(await req.json())
+    } catch (err) {
+        console.error(err)
     }
 }

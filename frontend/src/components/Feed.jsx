@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react"
 import MessageCard from "./MessageCard"
-import { fetchPost } from "../api/api"
 import { useUserStore } from "../store/store"
 import MessageField from "./MessageField"
+import { fetchMessages } from "../api/api"
+import { useMessageStore } from "../store/UseMessageStore"
 
-const Feed = () => {
-    const [messages, setMessages] = useState(undefined)
-    const {jwt} = useUserStore()
+const Feed = ({ myOwn }) => {
+    const { messages, getMessages } = useMessageStore()
+
+
     useEffect(() => {
         const handleFetch = async () => {
             try {
-                setMessages(await fetchPost())
+                await getMessages();
             } catch (err) {
                 console.error(err)
             }
@@ -20,16 +22,27 @@ const Feed = () => {
 
     return (
         <>
-        {jwt && <MessageField/>}
-        <div className="messages-section">
-            <div className="container">
-                <h2 className="section-title">Последние сообщения</h2>
-                <div className="messages-gtid">
-                    {messages && messages.map((message) => (
-                        <MessageCard key={message.id} {...message} />))}
+
+            <div className="messages-section">
+                <div className="container">
+                    <h2 className="section-title">Последние сообщения</h2>
+                    <div className="messages-gtid">
+                        {!myOwn 
+                        ? messages && 
+                        messages.map((message) => (
+                            <MessageCard key={message.id} {...message} />
+                        ))
+                            : messages.filter((message) => message.userId == jwt.userId
+                            )
+                                .map((message) => (
+                                    <MessageCard 
+                                    key={message.id} 
+                                    {...message} 
+                                    />
+                                ))}
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }
