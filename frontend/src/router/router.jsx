@@ -36,6 +36,6 @@ export const router = createBrowserRouter([
     },
 ],
     {
-        basename: "/mobded-lab13-rupich"
+        basename: "/mobdev-lab13-rupich"
     }
 )
