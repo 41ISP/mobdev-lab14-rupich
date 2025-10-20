@@ -52,13 +52,13 @@ export const fetchMessages = async () => {
 }
 export const sendMessage = async (message) => {
     try {
-        const {jwt} = useUserStore()
+        const {jwt} = useUserStore.getState()
         const req = await fetch(`https://kitek.ktkv.dev/feedback/api/messages`, {
             method: "POST",
-            body: JSON.stringify(user),
+            body: JSON.stringify(message),
             headers: {
                 "Content-Type": "application/json",
-                "Avthorization": "Bearer " + jwt,
+                "Authorization": "Bearer " + jwt.token,
             },
         }
         )

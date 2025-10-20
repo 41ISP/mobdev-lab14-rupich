@@ -7,7 +7,7 @@ import { useMessageStore } from "../store/UseMessageStore"
 
 const Feed = ({ myOwn }) => {
     const { messages, getMessages } = useMessageStore()
-
+    const {jwt} = useUserStore()
 
     useEffect(() => {
         const handleFetch = async () => {
@@ -29,14 +29,14 @@ const Feed = ({ myOwn }) => {
                     <div className="messages-gtid">
                         {!myOwn 
                         ? messages && 
-                        messages.map((message) => (
-                            <MessageCard key={message.id} {...message} />
+                        messages.map((message, index) => (
+                            <MessageCard key={index} {...message} />
                         ))
-                            : messages.filter((message) => message.userId == jwt.userId
+                            : messages && messages.filter((message) => message.userId == jwt.userId
                             )
-                                .map((message) => (
+                                .map((message, index) => (
                                     <MessageCard 
-                                    key={message.id} 
+                                    key={index} 
                                     {...message} 
                                     />
                                 ))}

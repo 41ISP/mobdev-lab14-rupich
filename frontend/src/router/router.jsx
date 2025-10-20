@@ -19,20 +19,23 @@ export const router = createBrowserRouter([
     },
     {
         path: "/logout",
-        element:<Logout />
+        element: <Logout />
     },
     {
         path: "/",
-        element: <Loyout/>,
-        children: [{index: true, element: <Board />},
-            {
-                path: "my-messages",
-                element: 
+        element: <Loyout />,
+        children: [{ index: true, element: <Board /> },
+        {
+            path: "my-messages",
+            element:
                 <AuthGuard>
-                <MyMessages/>
+                    <MyMessages />
                 </AuthGuard>
-            },
+        },
         ],
     },
 ],
+    {
+        basename: "/mobded-lab13-rupich"
+    }
 )
